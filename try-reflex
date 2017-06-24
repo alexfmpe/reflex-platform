@@ -61,4 +61,4 @@ EOF
 )
 
 terminate_logging
-try_reflex_shell --command "echo \"$INFO\" ; return" "$@"
+try_reflex_shell --command "ghcjs benchmark.hs" "$@"
