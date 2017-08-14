@@ -16,6 +16,7 @@ jobs:
       - run: sudo mkdir -p /nix
       - run: sudo chown -R circleci /nix
       - run: sudo mv ~/nix-store /nix/store
+      - run: nix-store --verify
 
       - run: ls /nix/store | wc
       - run: ls -l /nix/store
