@@ -10,14 +10,19 @@ jobs:
       - checkout
       - run: curl https://nixos.org/nix/install | sh
 
+      - run: mkdir -p ~/nix-store
       - restore_cache:
           keys:
             - my-cache
+            
+      - run: mv ~/nix-store /nix/store
         
       - run: nix-shell -p hello --command hello
 
+      - run: cp -r /nix/store ~/nix/store
+    
       - save_cache:
           key: my-cache
-          paths: /nix/store
+          paths: ~/nix-store
 
 #
