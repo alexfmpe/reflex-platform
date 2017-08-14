@@ -3,7 +3,7 @@ language: nix
 script:
   - git config --global user.email "travis-ci@example.com"
   - git config --global user.name "Travis-CI"
-  - nix-shell -p hello
+  - nix-shell -p hello --command hello
   #- ./try-reflex --command "exit 0"
   - travis_wait ./test -j 2
 cache:
