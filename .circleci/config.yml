@@ -14,6 +14,7 @@ jobs:
           keys:
             - my-proxy-cache
       - run: sudo mkdir -p /nix
+      - run: sudo chown -R circleci /nix
       - run: sudo mv ~/nix-store /nix/store
 
       - run: ls /nix/store
