@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: curl https://nixos.org/nix/install | sh
+      - run: cat ~/.nix-profile/etc/profile.d/nix.sh
       - run: echo $PATH
       - run: source ~/.nix-profile/etc/profile.d/nix.sh
       - run: echo $PATH
