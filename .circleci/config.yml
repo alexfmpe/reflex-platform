@@ -8,15 +8,16 @@ jobs:
 
     steps:
       - checkout
-      - run: curl https://nixos.org/nix/install | sh
-
+      
       - run: mkdir -p ~/nix-store
       - restore_cache:
           keys:
             - my-proxy-cache
+      - run: sudo mkdir -p /nix
+      - run: mv ~/nix-store /nix/store
 
       - run: ls /nix/store
-      - run: mv ~/nix-store/* /nix/store
+      - run: curl https://nixos.org/nix/install | sh
       - run: ls /nix/store
         
       - run: nix-shell -p hello --command hello
