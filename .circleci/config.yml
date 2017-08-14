@@ -9,5 +9,14 @@ jobs:
     steps:
       - checkout
       - run: curl https://nixos.org/nix/install | sh
+
+      - restore_cache:
+          keys:
+            - my-cache
+        
       - run: nix-shell -p hello --command hello
+
+      - save_cache:
+          key: my-cache
+          paths: /nix/store
 
