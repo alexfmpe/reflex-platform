@@ -9,14 +9,13 @@ jobs:
     steps:
       - checkout
       
-      - run: mkdir -p ~/nix-store
       - restore_cache:
           keys:
             - my-dump
 
       - run: curl https://nixos.org/nix/install | sh
 
-      - run: if [ -f "dump"]; then nix-store --restore ~/dump; fi;
+      - run: if [ -f "~/dump"]; then nix-store --restore ~/dump; fi;
 
       - run: ls /nix/store | wc
       - run: ls -l /nix/store
@@ -26,7 +25,7 @@ jobs:
       - run: ls /nix/store | wc
       - run: ls -l /nix/store
 
-      - run: nix-store --dump ~/dump
+      - run: nix-store /nix/store ~/dump
         
       - save_cache:
           key: my-dump
