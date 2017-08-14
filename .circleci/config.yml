@@ -1,5 +1,7 @@
 version: 2
 jobs:
+  machine:
+    
   build:
     steps:
       - checkout
