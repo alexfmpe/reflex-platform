@@ -9,6 +9,7 @@ jobs:
       - run: curl https://nixos.org/nix/install | sh
       #- run: cat ~/.nix-profile/etc/profile.d/nix.sh
       - run: echo $PATH
+      - run: . /home/circleci/.nix-profile/etc/profile.d/nix.sh
       # - run: source ~/.nix-profile/etc/profile.d/nix.sh # doesn't work for some reason
       - run: echo $PATH
       - run: nix-env
