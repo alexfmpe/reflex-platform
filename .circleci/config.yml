@@ -8,6 +8,9 @@ jobs:
 
     steps:
       - checkout
+
+      - run: sudo mkdir -p /nix
+      - run: sudo chown circleci /nix
       
       - restore_cache:
           keys:
