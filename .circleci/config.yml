@@ -10,7 +10,7 @@ jobs:
       - checkout
 
       - run: sudo mkdir -p /nix
-      - run: sudo chown $(USER) /nix
+      - run: sudo chown $USER /nix
       
       - restore_cache:
           keys:
