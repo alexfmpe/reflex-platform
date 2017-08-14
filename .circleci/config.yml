@@ -12,28 +12,25 @@ jobs:
       - run: mkdir -p ~/nix-store
       - restore_cache:
           keys:
-            - my-proxy-cache-3
-      - run: sudo mkdir -p /nix
-      - run: sudo chown -R circleci /nix
-      - run: sudo mv ~/nix-store /nix/store
-
-      - run: ls /nix/store | wc
-      - run: ls -l /nix/store
+            - my-dump
 
       - run: curl https://nixos.org/nix/install | sh
-        
+
+      - run: if [ -f "dump"]; then nix-store --restore ~/dump; fi;
+
       - run: ls /nix/store | wc
       - run: ls -l /nix/store
 
-      - run: nix-store --verify
       - run: nix-shell -p hello --command hello
 
       - run: ls /nix/store | wc
       - run: ls -l /nix/store
+
+      - run: nix-store --dump ~/dump
         
-      - run: cp -r /nix/store ~/nix-store
       - save_cache:
-          key: my-proxy-cache-3
-          paths: ~/nix-store
+          key: my-dump
+          paths: ~/dump
+
 
 
