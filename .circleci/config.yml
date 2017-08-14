@@ -13,7 +13,7 @@ jobs:
       - run: mkdir -p ~/nix-store
       - restore_cache:
           keys:
-            - my-cache
+            - my-proxy-cache
             
       - run: mv ~/nix-store /nix/store
         
@@ -22,7 +22,7 @@ jobs:
       - run: cp -r /nix/store ~/nix/store
     
       - save_cache:
-          key: my-cache
+          key: my-proxy-cache
           paths: ~/nix-store
 
 #
