@@ -27,7 +27,7 @@ jobs:
       - run: ls -l /nix/store
         
       - save_cache:
-          key: my-nix
+          key: my-nix-{{ epoch }}
           paths: /nix
 
 
