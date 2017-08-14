@@ -15,7 +15,7 @@ jobs:
 
       - run: curl https://nixos.org/nix/install | sh
 
-      - run: if [ -f "~/dump"]; then nix-store --restore ~/dump; fi;
+      - run: if [ -f "~/dump" ]; then nix-store --restore ~/dump; fi;
 
       - run: ls /nix/store | wc
       - run: ls -l /nix/store
