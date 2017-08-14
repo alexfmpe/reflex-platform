@@ -6,5 +6,6 @@ jobs:
     steps:
       - checkout
       - run: curl https://nixos.org/nix/install | sh
+      - run: source ~/.nix-profile/etc/profile.d/nix.sh
       - run: nix-shell -p hello --command hello
 
