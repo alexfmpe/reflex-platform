@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     environment:
-      BASH_ENV: "~/.bash_profile"
+      BASH_ENV: "~/.nix-profile/etc/profile.d/nix.sh"
       
     machine: true
 
