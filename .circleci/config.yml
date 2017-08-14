@@ -11,7 +11,7 @@ jobs:
       
       - restore_cache:
           keys:
-            - my-dump
+            - my-dump2
 
       - run: curl https://nixos.org/nix/install | sh
 
@@ -29,7 +29,7 @@ jobs:
       - run: nix-store --dump /nix/store > ~/dump
         
       - save_cache:
-          key: my-dump
+          key: my-dump2
           paths: ~/dump
 
 
