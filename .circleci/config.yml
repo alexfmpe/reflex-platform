@@ -14,8 +14,10 @@ jobs:
       - restore_cache:
           keys:
             - my-proxy-cache
-            
+
+      - run: ls /nix/store
       - run: mv ~/nix-store /nix/store
+      - run: ls /nix/store
         
       - run: nix-shell -p hello --command hello
 
