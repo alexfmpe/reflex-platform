@@ -17,11 +17,14 @@ jobs:
       - run: sudo chown -R circleci /nix
       - run: sudo mv ~/nix-store /nix/store
 
-      - run: ls /nix/store
+      - run: ls /nix/store | wc
+      - run: ls -l /nix/store
       - run: curl https://nixos.org/nix/install | sh
-      - run: ls /nix/store        
+      - run: ls /nix/store | wc
+      - run: ls -l /nix/store
       - run: nix-shell -p hello --command hello
-      - run: ls /nix/store
+      - run: ls /nix/store | wc
+      - run: ls -l /nix/store
         
       - run: cp -r /nix/store ~/nix-store
       - save_cache:
