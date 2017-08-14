@@ -11,12 +11,9 @@ jobs:
       
       - restore_cache:
           keys:
-            - my-dump3
+            - my-nix
 
       - run: curl https://nixos.org/nix/install | sh
-
-      - run: ls ~
-      - run: if [ -f "$HOME/dump" ]; then nix-store --import ~/dump; else echo "bah"; fi;
         
       - run: ls /nix/store | wc
       - run: ls -l /nix/store
@@ -25,12 +22,10 @@ jobs:
 
       - run: ls /nix/store | wc
       - run: ls -l /nix/store
-
-      - run: nix-store --export /nix/store > ~/dump
         
       - save_cache:
-          key: my-dump3
-          paths: ~/dump
+          key: my-nix
+          paths: /nix
 
 
 
