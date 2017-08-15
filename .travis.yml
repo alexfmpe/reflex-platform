@@ -7,9 +7,9 @@ install:
   - mkdir -p ~/my-nix
   - sudo mkdir -p /nix
   - sudo chown $USER /nix
-  - sudo cp -r ~/my-nix /nix
+  - cp -r ~/my-nix /nix
 
-  - sudo mkdir -p /nix/store
+  - mkdir -p /nix/store
   - sudo chown -R $USER /nix
   - ls /nix/store | wc
   - ls -l /nix/store
@@ -26,7 +26,7 @@ install:
   - ls -l /nix/store
 
   - sudo chown -R $USER /nix
-  - sudo cp -r /nix ~/my-nix
+  - cp -r /nix ~/my-nix
   #- ./try-reflex --command "exit 0"
   #- travis_wait ./test -j 2
 cache:
