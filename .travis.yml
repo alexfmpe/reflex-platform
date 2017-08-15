@@ -5,9 +5,9 @@ script:
   - nix-shell -p hello --command hello
   #- ./try-reflex --command "exit 0"
   #- travis_wait ./test -j 2
-cache:
-  directories:
-    - /nix
+#cache:
+#  directories:
+#    - /nix
 os:
   - linux
 #  - osx
