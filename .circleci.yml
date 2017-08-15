@@ -1,0 +1,17 @@
+machine:
+  environment:
+    BASH_ENV: "~/.nix-profile/etc/profile.d/nix.sh"
+
+dependencies:
+  pre:
+    - git config --global user.email "travis-ci@example.com"
+    - git config --global user.name "Travis-CI"
+    - curl https://nixos.org/nix/install | sh
+    - ./try-reflex --command "exit 0"
+    - ./test -j 2
+
+    
+#      - run: sudo mkdir -p /nix
+#- run: sudo chown $USER /nix
+
+
