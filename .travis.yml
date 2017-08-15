@@ -25,6 +25,7 @@ install:
   - ls /nix/store | wc
   - ls -l /nix/store
 
+  - sudo chown -R $USER /nix
   - sudo cp -r /nix ~/my-nix
   #- ./try-reflex --command "exit 0"
   #- travis_wait ./test -j 2
