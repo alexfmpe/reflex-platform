@@ -8,11 +8,21 @@ install:
   - sudo mkdir -p /nix
   - sudo chown $USER /nix
   - sudo mv ~/nix-store /nix/store 
-  
+
+  - ls /nix/store | wc
+  - ls -l /nix/store
+        
   - curl https://nixos.org/nix/install | sh  
   - . ~/.nix-profile/etc/profile.d/nix.sh
-      
+
+  - ls /nix/store | wc
+  - ls -l /nix/store
+
   - nix-shell -p hello --command hello
+
+  - ls /nix/store | wc
+  - ls -l /nix/store
+
   - cp -r /nix/store ~/nix-store
   #- ./try-reflex --command "exit 0"
   #- travis_wait ./test -j 2
