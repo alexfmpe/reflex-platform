@@ -1,4 +1,5 @@
 sudo: required
+language: bash
 install:  
   - git config --global user.email "travis-ci@example.com"
   - git config --global user.name "Travis-CI"
