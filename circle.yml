@@ -13,5 +13,5 @@ dependencies:
   cache_directories:
     - /nix
     
-#      - run: sudo mkdir -p /nix
+#- run: sudo mkdir -p /nix
 #- run: sudo chown $USER /nix
