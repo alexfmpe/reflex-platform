@@ -9,8 +9,8 @@ jobs:
     steps:
       - checkout
 
-      - git config --global user.email "travis-ci@example.com"
-      - git config --global user.name "Travis-CI"
+      - run: git config --global user.email "travis-ci@example.com"
+      - run: git config --global user.name "Travis-CI"
 
       - run: sudo mkdir -p /nix
       - run: sudo chown $USER /nix
