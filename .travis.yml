@@ -1,6 +1,6 @@
 sudo: required
 language: bash
-build:
+install:
   - git config --global user.email "travis-ci@example.com"
   - git config --global user.name "Travis-CI"
 
