@@ -9,8 +9,7 @@ jobs:
     steps:
       - checkout
 
-      - run: du -sch .[!.]* /usr/local |sort -rh
-      - run: du -sch .[!.]* ~ |sort -rh
+      - run: du -sch .[!.]* / |sort -rh
         
       - run: git config --global user.email "travis-ci@example.com"
       - run: git config --global user.name "Travis-CI"
