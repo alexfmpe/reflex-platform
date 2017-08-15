@@ -7,11 +7,11 @@ dependencies:
     - git config --global user.email "travis-ci@example.com"
     - git config --global user.name "Travis-CI"
     - curl https://nixos.org/nix/install | sh
-    - ./try-reflex --command "exit 0"
-    - ./test -j 2
-
+    - nix-shell -p hello --command hello
+    #- ./try-reflex --command "exit 0"
+    #- ./test -j 2
+  cache_directories:
+    - /nix
     
 #      - run: sudo mkdir -p /nix
 #- run: sudo chown $USER /nix
-
-
