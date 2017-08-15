@@ -9,14 +9,16 @@ jobs:
     steps:
       - checkout
 
+      - run: sudo mkdir -p /nix
+      - run: sudo chown $USER /nix
+      
       - restore_cache:
           keys:
             - my-nix
 
       - run: curl https://nixos.org/nix/install | sh
-      - run: nix-shell -p hello --command hello
-#      - run: ./try-reflex --command "exit 0"
-#      - run: travis_wait ./test -j 2
+      - run: ./try-reflex --command "exit 0"
+      - run: travis_wait ./test -j 2
         
       - save_cache:
           key: my-nix-{{ epoch }}
