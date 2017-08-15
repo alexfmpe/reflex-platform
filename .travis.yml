@@ -7,7 +7,7 @@ install:
   - mkdir -p ~/my-nix
   - sudo mkdir -p /nix
   - sudo chown $USER /nix
-  - sudo mv ~/my-nix/* /nix/
+  - sudo cp -r ~/my-nix /nix
 
   - ls /nix/store | wc
   - ls -l /nix/store
