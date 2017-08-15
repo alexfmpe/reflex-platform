@@ -10,6 +10,7 @@ install:
   - sudo cp -r ~/my-nix /nix
 
   - sudo mkdir -p /nix/store
+  - sudo chown -R $USER /nix
   - ls /nix/store | wc
   - ls -l /nix/store
         
