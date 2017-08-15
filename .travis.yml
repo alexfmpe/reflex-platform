@@ -4,10 +4,10 @@ install:
   - git config --global user.email "travis-ci@example.com"
   - git config --global user.name "Travis-CI"
 
-  - mkdir -p ~/nix-store
+  - mkdir -p ~/my-nix
   - sudo mkdir -p /nix
   - sudo chown $USER /nix
-  - sudo mv ~/nix-store /nix/store 
+  - sudo mv ~/my-nix/* /nix/
 
   - ls /nix/store | wc
   - ls -l /nix/store
@@ -23,12 +23,12 @@ install:
   - ls /nix/store | wc
   - ls -l /nix/store
 
-  - cp -r /nix/store ~/nix-store
+  - cp -r /nix ~/my-nix
   #- ./try-reflex --command "exit 0"
   #- travis_wait ./test -j 2
 cache:
   directories:
-    - ~/nix-store
+    - ~/my-nix
 os:
   - linux
   - osx
