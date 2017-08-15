@@ -6,7 +6,8 @@ install:
   - sudo mkdir -p /nix
   - sudo chown $USER /nix
   - curl https://nixos.org/nix/install | sh  
-
+  - . ~/.nix-profile/etc/profile.d/nix.sh
+      
   - nix-shell -p hello --command hello
   #- ./try-reflex --command "exit 0"
   #- travis_wait ./test -j 2
