@@ -1,7 +1,12 @@
 sudo: required
-install:
+install:  
   - git config --global user.email "travis-ci@example.com"
   - git config --global user.name "Travis-CI"
+
+  - sudo mkdir -p /nix
+  - sudo chown $USER /nix
+  - curl https://nixos.org/nix/install | sh  
+
   - nix-shell -p hello --command hello
   #- ./try-reflex --command "exit 0"
   #- travis_wait ./test -j 2
@@ -10,4 +15,6 @@ cache:
     - /nix
 os:
   - linux
-#  - osx
+  - osx
+
+
