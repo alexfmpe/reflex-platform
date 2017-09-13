@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
 
-      - run: apk add git
+      - run: apk update && apk upgrade && apk add git
       - run: git config --global user.email "travis-ci@example.com"
       - run: git config --global user.name "Travis-CI"
 
