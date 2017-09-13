@@ -10,9 +10,9 @@ jobs:
     steps:
       - checkout
 
-      - run: sudo du -sch /usr/local   | sort -rh | head -10
-      - run: sudo du -sch /home/ubuntu | sort -rh | head -10
-      - run: sudo du -sch ~  | sort -rh | head -10
+#      - run: sudo du -sch /usr/local   | sort -rh | head -10
+#      - run: sudo du -sch /home/ubuntu | sort -rh | head -10
+#      - run: sudo du -sch ~  | sort -rh | head -10
 
       - run: git config --global user.email "travis-ci@example.com"
       - run: git config --global user.name "Travis-CI"
