@@ -14,8 +14,11 @@ jobs:
 #          keys:
 #            - my-nix
 
-      - run: chown $USER /nix
-        
+#      - run: chown $USER /nix
+
+
+
+      - run: chmod go-w /
       - run: nix-env -i git        
       - run: git config --global user.email "travis-ci@example.com"
       - run: git config --global user.name "Travis-CI"
