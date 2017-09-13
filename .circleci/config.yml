@@ -3,8 +3,9 @@ jobs:
   build:
     environment:
       BASH_ENV: "~/.nix-profile/etc/profile.d/nix.sh"
-      
-    machine: true
+
+    docker:
+      - image: buildpack-deps:trusty
 
     steps:
       - checkout
