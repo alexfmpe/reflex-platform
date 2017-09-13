@@ -9,11 +9,13 @@ jobs:
 
     steps:
 #      - run: sudo mkdir -p /nix
-#      - run: sudo chown $USER /nix      
+
 #      - restore_cache:
 #          keys:
 #            - my-nix
 
+      - run: chown $USER /nix
+        
       - run: nix-env -i git        
       - run: git config --global user.email "travis-ci@example.com"
       - run: git config --global user.name "Travis-CI"
