@@ -10,9 +10,10 @@ jobs:
     steps:
       - checkout
 
-      - run: apk update && apk upgrade && apk add git
+      - run: nix-env -i git        
       - run: git config --global user.email "travis-ci@example.com"
       - run: git config --global user.name "Travis-CI"
+
 
 #      - run: sudo mkdir -p /nix
 #      - run: sudo chown $USER /nix
@@ -21,7 +22,7 @@ jobs:
           keys:
             - my-nix
 
-      - run: curl https://nixos.org/nix/install | sh
+#      - run: curl https://nixos.org/nix/install | sh
       - run: ./try-reflex --command "exit 0"
       - run: ./test -j 2
         
