@@ -26,6 +26,8 @@ jobs:
 
       - run: df -h          
 
+      - run: nix-collect-garbage
+      - run: df -h
       - run: ./test -j 2
       - run: df -h        
       - save_cache:
