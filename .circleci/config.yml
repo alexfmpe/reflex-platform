@@ -8,8 +8,11 @@ jobs:
 
     steps:
       - checkout
-      
+
+      - run: echo $TMPDIR
+      - run: du -sch $TMPDIR        
       - run: df -h
+        
       - run: git config --global user.email "travis-ci@example.com"
       - run: git config --global user.name "Travis-CI"
 
@@ -20,15 +23,18 @@ jobs:
           keys:
             - reflex
 
+      - run: du -sch $TMPDIR
       - run: df -h
+        
       - run: curl https://nixos.org/nix/install | sh
       - run: ./try-reflex --command "exit 0"
 
+      - run: du -sch $TMPDIR
       - run: df -h          
 
-      - run: nix-collect-garbage
-      - run: df -h
       - run: ./test -j 2
+
+      - run: du -sch $TMPDIRh
       - run: df -h        
       - save_cache:
           key: reflex-{{ epoch }}
