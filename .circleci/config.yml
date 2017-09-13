@@ -18,28 +18,18 @@ jobs:
       
       - restore_cache:
           keys:
-            - try-reflex
+            - reflex
 
       - run: df -h
       - run: curl https://nixos.org/nix/install | sh
       - run: ./try-reflex --command "exit 0"
-      - save_cache:
-          key: try-reflex-{{ epoch }}
-          paths: /nix
 
       - run: df -h          
-      - run: nix-collect-garbage
 
-      - run: df -h
-      - restore_cache:
-          keys:
-            - test
-
-      - run: df -h        
       - run: ./test -j 2
       - run: df -h        
       - save_cache:
-          key: test-{{ epoch }}
+          key: reflex-{{ epoch }}
           paths: /nix
 
 
