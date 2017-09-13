@@ -6,7 +6,7 @@ jobs:
 
     docker:
       - image: buildpack-deps:trusty
-        user: reflex-frp
+#        user: reflex-frp
 
     steps:
       - checkout
@@ -19,7 +19,7 @@ jobs:
       - run: git config --global user.name "Travis-CI"
 
       - run: sudo mkdir -p /nix
-      - run: sudo chown $USER /nix
+#      - run: sudo chown $USER /nix
       
       - restore_cache:
           keys:
