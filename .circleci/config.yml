@@ -5,8 +5,7 @@ jobs:
       BASH_ENV: "~/.nix-profile/etc/profile.d/nix.sh"
 
     docker:
-      - image: buildpack-deps:trusty
-#        user: reflex-frp
+      - image: nixos/nix
 
     steps:
       - checkout
@@ -18,7 +17,7 @@ jobs:
       - run: git config --global user.email "travis-ci@example.com"
       - run: git config --global user.name "Travis-CI"
 
-      - run: sudo mkdir -p /nix
+#      - run: sudo mkdir -p /nix
 #      - run: sudo chown $USER /nix
       
       - restore_cache:
