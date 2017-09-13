@@ -17,8 +17,9 @@ jobs:
 #      - run: chown $USER /nix
 
 
-
+      - run: ls -ld /
       - run: chmod go-w /
+      - run: ls -ld /
       - run: nix-env -i git        
       - run: git config --global user.email "travis-ci@example.com"
       - run: git config --global user.name "Travis-CI"
