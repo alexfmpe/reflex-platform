@@ -9,8 +9,11 @@ jobs:
     steps:
       - checkout
 
-      - run: git config --global user.email "travis-ci@example.com"
-      - run: git config --global user.name "Travis-CI"
+      #- run: git config --global user.email "travis-ci@example.com"
+      #- run: git config --global user.name "Travis-CI"
 
-      - run: ./try-reflex --command "exit 0"
-      - run: ./test -j 2
+      #- run: ./try-reflex --command "exit 0"
+      #- run: ./test -j 2
+
+      - run: curl https://nixos.org/nix/install | sh
+      - run: ./benchmark
