@@ -5,4 +5,10 @@ DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 cd "$DIR"
 
-"$(nix-build ./benchmark.nix)"
+BUILD="$(nix-build ./benchmarking/build.nix)"
+RUN="$(nix-build ./benchmarking/run.nix)"
+
+SANDBOX="$( $BUILD )"
+trap "rm -rf \"$SANDBOX\"" EXIT
+
+$RUN $SANDBOX
