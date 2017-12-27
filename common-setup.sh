@@ -42,6 +42,8 @@ user_error() {
 reset_daemon() {
     if [ "$(uname -s)" == 'Darwin' ]; then
 	sudo launchctl stop org.nixos.nix-daemon
+	sudo launchctl unload /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+	sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
 	sudo launchctl start org.nixos.nix-daemon
     fi;
 }
