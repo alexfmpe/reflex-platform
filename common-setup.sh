@@ -248,7 +248,7 @@ cleanup_nix_path() {
 }
 
 prebuild_try_reflex_shell() {
-  nix-build "$DIR/shell.nix" --drv-link "$DIR/gc-roots/shell.drv" $NIXOPTS --indirect --add-root "$DIR/gc-roots/shell.out" >/dev/null
+  nix-build "$DIR/shell.nix" $NIXOPTS --add-root "$DIR/gc-roots/shell.out" >/dev/null
 }
 
 try_reflex_shell() {
