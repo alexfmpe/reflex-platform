@@ -12,6 +12,13 @@ import qualified Data.Text as T
 main :: IO ()
 main = hspec $ parallel $ do
   let silently = id -- Temporarily disable 'silently'
+  describe "stack" $ do
+    forM_ ["ghc", "ghcjs"] $ \platform -> do
+      it ("can build hello world with " <> platform) $ do
+        shelly $ silently $
+          run "nix-shell" ["--command", "stack exec -- " <> fromString platform <> " helloDom.hs"]
+        return () :: IO ()
+
   describe "try-reflex" $ do
     -- Test that the try-reflex shell is able to build a simple "Hello, world!" application with both ghc and ghcjs
     forM_ ["ghc", "ghcjs"] $ \platform -> do

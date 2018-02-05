@@ -1,0 +1,6 @@
+resolver: ghcjs-0.2.1_ghc-8.0.2
+system-ghc: true
+install-ghc: false
+
+packages: []
+
