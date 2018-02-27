@@ -247,11 +247,13 @@ cleanup_nix_path() {
   echo "$1" | sed 's@/*$@@'
 }
 
+SHELL_DRV=$("$DIR/gc-roots/shell.drv")
 prebuild_try_reflex_shell() {
-  nix-build "$DIR/shell.nix" --drv-link "$DIR/gc-roots/shell.drv" $NIXOPTS --indirect --add-root "$DIR/gc-roots/shell.out" >/dev/null
+  nix-instantiate $NIXOPTS "$DIR/shell.nix" --indirect --add-root "$SHELL_DRV"
+  nix-store -r "$SHELL_DRV" --indirect --add-root "$DIR/result"
 }
 
 try_reflex_shell() {
   prebuild_try_reflex_shell
-  nix-shell "$DIR/gc-roots/shell.drv" $NIXOPTS "$@"
+  nix-shell "$SHELL_DRV" $NIXOPTS "$@"
 }
