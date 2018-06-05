@@ -310,9 +310,6 @@ nixpkgs.runCommand "${executableName}-app" (rec {
     for y in "$out/${executableName}.app/Frameworks/"*.dylib
     do
       dylib=$(basename $y)
-      ${nixpkgs.darwin.cctools}/bin/install_name_tool \
-        -change "${libiconv}/lib/$dylib" @rpath/Frameworks/$dylib \
-        "$x"
       sed -i "$x" -e \
         "s|${libiconv}/lib/$dylib|@rpath/Frameworks/${ lib.concatStrings (builtins.genList (_: "/") ((lib.strings.stringLength (toString libiconv)) - 31 + 17)) }/$dylib|"
     done
