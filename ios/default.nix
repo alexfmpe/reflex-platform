@@ -305,14 +305,16 @@ nixpkgs.runCommand "${executableName}-app" (rec {
     "$out/${executableName}.app/${executableName}" \
     "$out/${executableName}.app/Frameworks/"*.dylib
   do
+    ${nixpkgs.darwin.cctools}/bin/install_name_tool -add_rpath @executable_path "$x"
+    ${nixpkgs.darwin.cctools}/bin/install_name_tool -add_rpath @loader_path "$x"
     for y in "$out/${executableName}.app/Frameworks/"*.dylib
     do
       dylib=$(basename $y)
       ${nixpkgs.darwin.cctools}/bin/install_name_tool \
-        -change "${libiconv}/lib/$dylib" @executable_path/../Frameworks/$dylib \
+        -change "${libiconv}/lib/$dylib" @rpath/Frameworks/$dylib \
         "$x"
       sed -i "$x" -e \
-        "s|${libiconv}/lib/$dylib|@executable_path/../Frameworks/${ lib.concatStrings (builtins.genList (_: "/") ((lib.strings.stringLength (toString libiconv)) - 31 + 4)) }/$dylib|"
+        "s|${libiconv}/lib/$dylib|@rpath/Frameworks/${ lib.concatStrings (builtins.genList (_: "/") ((lib.strings.stringLength (toString libiconv)) - 31 + 17)) }/$dylib|"
     done
   done
   cp -RL "${staticSrc}"/* "$out/${executableName}.app/"
