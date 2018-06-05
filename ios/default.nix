@@ -300,18 +300,18 @@ nixpkgs.runCommand "${executableName}-app" (rec {
   # TODO: Override libraries with stubs from the SDK, so as to link libraries
   # on phone. Or statically link.
   mkdir -p "$out/${executableName}.app/Frameworks"
-  cp --no-preserve=mode "${libiconv}/lib/"*.dylib "$out/${executableName}.app/Frameworks/"
+  cp --no-preserve=mode "${libiconv}/lib/"*.dylib "$out/${executableName}.app/"
   for x in \
     "$out/${executableName}.app/${executableName}" \
-    "$out/${executableName}.app/Frameworks/"*.dylib
+    "$out/${executableName}.app/"*.dylib
   do
     ${nixpkgs.darwin.cctools}/bin/install_name_tool -add_rpath @executable_path "$x"
     ${nixpkgs.darwin.cctools}/bin/install_name_tool -add_rpath @loader_path "$x"
-    for y in "$out/${executableName}.app/Frameworks/"*.dylib
+    for y in "$out/${executableName}.app/"*.dylib
     do
       dylib=$(basename $y)
       sed -i "$x" -e \
-        "s|${libiconv}/lib/$dylib|@rpath/Frameworks/${ lib.concatStrings (builtins.genList (_: "/") ((lib.strings.stringLength (toString libiconv)) - 31 + 17)) }/$dylib|"
+        "s|${libiconv}/lib/$dylib|@rpath/${ lib.concatStrings (builtins.genList (_: "/") ((lib.strings.stringLength (toString libiconv)) - 31 + 28)) }/$dylib|"
     done
   done
   cp -RL "${staticSrc}"/* "$out/${executableName}.app/"
