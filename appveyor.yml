@@ -1,0 +1,9 @@
+image: Windows Server 2019
+
+build_script:
+- wslconfig /setdefault ubuntu
+- wsl lsb_release -a
+- wsl ./try-reflex
+
+test: off
+deploy: off
