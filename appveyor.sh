@@ -1,3 +1,2 @@
-sudo mkdir /etc/nix
-sudo echo 'use-sqlite-wal = false' > /etc/nix/nix.conf
-./try-reflex
+#https://github.com/NixOS/nix/issues/2292#issuecomment-443933924
+sudo mkdir /etc/nix; echo 'use-sqlite-wal = false' | sudo tee -a /etc/nix/nix.conf && sh <(curl https://nixos.org/nix/install)
