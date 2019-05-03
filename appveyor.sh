@@ -2,3 +2,5 @@
 sudo mkdir /etc/nix;
 echo 'use-sqlite-wal = false' | sudo tee -a /etc/nix/nix.conf
 echo 'sandbox = false' | sudo tee -a /etc/nix/nix.conf
+
+echo "Yes" | ./try-reflex
