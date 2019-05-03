@@ -4,6 +4,7 @@ build_script:
 - wslconfig /setdefault ubuntu
 - wsl lsb_release -a
 - wsl ./try-reflex
+- wsl echo "bump"
 
 test: off
 deploy: off
