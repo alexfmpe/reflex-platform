@@ -2,8 +2,9 @@ image: Windows Server 2019
 
 build_script:
 - wslconfig /setdefault ubuntu
-- wsl mkdir /etc/nix
-- wsl echo 'use-sqlite-wal = false' > /etc/nix/nix.conf
+- wsl unshare --user --pid echo YES
+- wsl sudo mkdir /etc/nix
+- wsl sudo echo 'use-sqlite-wal = false' > /etc/nix/nix.conf
 - wsl ./try-reflex
 
 test: off
