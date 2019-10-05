@@ -1,0 +1,9 @@
+image: Windows Server 2019
+
+build_script:
+- wslconfig /setdefault ubuntu-18.04
+- wsl ./scripts/setup-ci
+- wsl ./try-reflex --command exit
+
+test: off
+deploy: off
