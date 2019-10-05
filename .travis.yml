@@ -1,0 +1,12 @@
+language: generic
+
+sudo: yes
+
+os:
+  - osx
+  - linux
+
+script:
+  - |
+    ./scripts/setup-ci
+    ./try-reflex
