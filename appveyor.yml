@@ -1,7 +1,5 @@
 image: Windows Server 2019
 
-environment:
-
 init:
   - wslconfig /setdefault ubuntu-18.04
   - wsl export APPVEYOR_SSH_KEY=AAAAB3NzaC1yc2EAAAADAQABAAABAQDkUrodbLyX/49snKoC/eJW3o8M2sabVKBABDkeBMwE1XCMz/9xuWqRTP3pkPgBDYeHSCsmYzoCHbQyfXAwlGhBJgtHv6+lXElL2K6WE1UghtM+XNIfdMRPKbu3GNdVMT3WsGVGnkioUwdqcs4rr88YMFJeepA+NLN9uNQpcAB6OlgDmpXGkuLvmY6k+wLjXpWuGPujm9C3LzROP/dHbiNVK7HBF2jj6GBIhCXpS4weovXq27wGZiFzRIhR/FUtDDyPCnVC8bIhaarpyJlPEdfPNU1PzEe4zJnwHQ274ya3fOLHF2fdLP+qugVUTscXxNhGmMioE2Gy895DNL7jrkJP
