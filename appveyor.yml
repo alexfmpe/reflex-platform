@@ -5,7 +5,7 @@ build_script:
 - wsl ./scripts/setup-ci
 - wsl git clone https://github.com/ElvishJerricco/reflex-project-skeleton
 - wsl cd reflex-project-skeleton
-- wsl nix-shell shells.ghc --run exit
+- wsl . /home/appveyor/.nix-profile/etc/profile.d/nix.sh && nix-shell shells.ghc --run exit
 - wsl cat /nix/store/dmmz1n0a7z3vw7rplmy25cpyz7vrqd48-shell-x86_64-linux.drv
 
 test: off
