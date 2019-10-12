@@ -1,13 +1,12 @@
 image: Windows Server 2019
 
-init:
-  - wslconfig /setdefault ubuntu-18.04
-  - wsl APPVEYOR_SSH_KEY=AAAAB3NzaC1yc2EAAAADAQABAAABAQDkUrodbLyX/49snKoC/eJW3o8M2sabVKBABDkeBMwE1XCMz/9xuWqRTP3pkPgBDYeHSCsmYzoCHbQyfXAwlGhBJgtHv6+lXElL2K6WE1UghtM+XNIfdMRPKbu3GNdVMT3WsGVGnkioUwdqcs4rr88YMFJeepA+NLN9uNQpcAB6OlgDmpXGkuLvmY6k+wLjXpWuGPujm9C3LzROP/dHbiNVK7HBF2jj6GBIhCXpS4weovXq27wGZiFzRIhR/FUtDDyPCnVC8bIhaarpyJlPEdfPNU1PzEe4zJnwHQ274ya3fOLHF2fdLP+qugVUTscXxNhGmMioE2Gy895DNL7jrkJP APPVEYOR_SSH_BLOCK=true curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | APPVEYOR_SSH_KEY=AAAAB3NzaC1yc2EAAAADAQABAAABAQDkUrodbLyX/49snKoC/eJW3o8M2sabVKBABDkeBMwE1XCMz/9xuWqRTP3pkPgBDYeHSCsmYzoCHbQyfXAwlGhBJgtHv6+lXElL2K6WE1UghtM+XNIfdMRPKbu3GNdVMT3WsGVGnkioUwdqcs4rr88YMFJeepA+NLN9uNQpcAB6OlgDmpXGkuLvmY6k+wLjXpWuGPujm9C3LzROP/dHbiNVK7HBF2jj6GBIhCXpS4weovXq27wGZiFzRIhR/FUtDDyPCnVC8bIhaarpyJlPEdfPNU1PzEe4zJnwHQ274ya3fOLHF2fdLP+qugVUTscXxNhGmMioE2Gy895DNL7jrkJP APPVEYOR_SSH_BLOCK=true bash -e -
-
 build_script:
-# - wslconfig /setdefault ubuntu-18.04
+- wslconfig /setdefault ubuntu-18.04
 - wsl ./scripts/setup-ci
-- wsl ./try-reflex --command exit
+- wsl git clone https://github.com/ElvishJerricco/reflex-project-skeleton
+- wsl cd reflex-project-skeleton
+- wsl nix-shell shells.ghc --run exit
+- wsl cat /nix/store/dmmz1n0a7z3vw7rplmy25cpyz7vrqd48-shell-x86_64-linux.drv
 
 test: off
 deploy: off
