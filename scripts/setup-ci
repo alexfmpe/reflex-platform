@@ -7,7 +7,7 @@ echo 'sandbox = false' | sudo tee -a /etc/nix/nix.conf
 
 echo "Yes" | . "$DIR/scripts/common-setup.sh"
 
-git clone https://github.com/ElvishJerricco/reflex-project-skeleton
+git clone --recursive https://github.com/ElvishJerricco/reflex-project-skeleton
 cd reflex-project-skeleton
 . /home/appveyor/.nix-profile/etc/profile.d/nix.sh
 nix-shell -A shells.ghc --run exit
