@@ -9,5 +9,6 @@ echo "Yes" | . "$DIR/scripts/common-setup.sh"
 
 git clone https://github.com/ElvishJerricco/reflex-project-skeleton
 cd reflex-project-skeleton
+. /home/appveyor/.nix-profile/etc/profile.d/nix.sh
 nix-shell shells.ghc --run exit
 cat /nix/store/dmmz1n0a7z3vw7rplmy25cpyz7vrqd48-shell-x86_64-linux.drv
