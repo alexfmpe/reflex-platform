@@ -126,8 +126,6 @@ let iosSupport = system == "x86_64-darwin";
 
     mobileGhcOverlay = import ./nixpkgs-overlays/mobile-ghc { inherit lib; };
 
-    allCabalHashesOverlay = import ./nixpkgs-overlays/all-cabal-hashes;
-
     nixpkgsArgs = {
       inherit system;
       overlays = [
@@ -137,7 +135,7 @@ let iosSupport = system == "x86_64-darwin";
         forceStaticLibs
         splicesEval
         mobileGhcOverlay
-        allCabalHashesOverlay
+        #allCabalHashesOverlay
         (self: super: {
 
           runtimeShellPackage = if (self.stdenv.hostPlatform.isGhcjs || self.stdenv.targetPlatform.isiOS)
