@@ -321,6 +321,10 @@ let iosSupport = system == "x86_64-darwin";
     overrides = nixpkgsCross.ghcjs.haskell.overlays.combined;
   };
 
+  ghcAndroidAarch64Spliceless = (makeRecursivelyOverridable nixpkgs.pkgsCross.aarch64-android-prebuilt.pkgsStatic.haskell.packages.native-bignum.ghc912).override {
+    overrides = nixpkgs.haskell.overlays.combined;
+  };
+
   ghcwasm = ghcwasm9_12;
   ghcwasm9_12 = (makeRecursivelyOverridable nixpkgsCross.wasm.haskellPackages).override {
     overrides = nixpkgs.haskell.overlays.combined;
@@ -354,7 +358,7 @@ let iosSupport = system == "x86_64-darwin";
         new));
   };
 
-  ghcAndroidAarch64 = if __useNewerCompiler then ghcAndroidAarch64-8_10 else ghcAndroidAarch64-8_6;
+  ghcAndroidAarch64 = ghcAndroidAarch64Spliceless;
   ghcAndroidAarch64-8_6 = makeRecursivelyOverridableBHPToo ((makeRecursivelyOverridable nixpkgsCross.android.aarch64.haskell.packages.integer-simple.ghcSplices-8_6).override {
     overrides = nixpkgsCross.android.aarch64.haskell.overlays.combined;
   });
