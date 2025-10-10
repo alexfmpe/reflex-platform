@@ -1,8 +1,8 @@
 {
-  "owner": "nixos",
+  "owner": "alexfmpe",
   "repo": "nixpkgs",
-  "branch": "haskell-updates",
+  "branch": "cross-template-haskell",
   "private": false,
-  "rev": "9bd652c4305d1f6b6b59451036fd0a44a13f78d5",
-  "sha256": "0prw6ixmcw92khcijdi20h2bckfx6jz7i3asw3d8d59ybdniljqd"
+  "rev": "5a49a581d1e4be1bb422c3f332ecbfe8d7043dc6",
+  "sha256": "00mg23yzs50vw1s60jp5gdirm9k8v7ck7vjxbgh5ja452497gwk1"
 }
