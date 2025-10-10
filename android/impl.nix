@@ -27,12 +27,12 @@ let overrideAndroidCabal = package: overrideCabal package (drv: {
         cp -r "$src"/* "$out"
         substitute ${./deploy.sh} $out/bin/deploy \
           --subst-var-by coreutils ${nixpkgs.coreutils} \
-          --subst-var-by adb ${androidenv.androidPkgs_9_0.platform-tools} \
+          --subst-var-by adb ${androidenv.androidPkgs.platform-tools} \
           --subst-var-by java ${nixpkgs.openjdk17_headless} \
           --subst-var-by out $out
         chmod +x "$out/bin/deploy"
       '';
-      buildInputs = [ androidenv.androidPkgs_9_0.androidsdk ];
+      buildInputs = [ androidenv.androidPkgs.androidsdk ];
     } "";
     buildGradleApp = import ./build-gradle-app.nix {
       inherit (nixpkgs) stdenv lib gnumake gawk file runCommand
