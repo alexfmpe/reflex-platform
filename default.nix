@@ -184,7 +184,7 @@ let iosSupport = system == "x86_64-darwin";
         crossSystem = lib.systems.examples.ghcjs;
       });
       wasm = (import ./nix-wasm).legacyPackages.${nixpkgs.system};
-      
+
     };
 
     haskellLib = nixpkgs.haskell.lib;
@@ -293,19 +293,6 @@ let iosSupport = system == "x86_64-darwin";
   };
 
   ghcAndroidAarch64 = ghcAndroidAarch64Spliceless;
-  ghcAndroidAarch64-8_6 = makeRecursivelyOverridableBHPToo ((makeRecursivelyOverridable nixpkgsCross.android.aarch64.haskell.packages.integer-simple.ghcSplices-8_6).override {
-    overrides = nixpkgsCross.android.aarch64.haskell.overlays.combined;
-  });
-  ghcAndroidAarch64-8_10 = makeRecursivelyOverridableBHPToo ((makeRecursivelyOverridable nixpkgsCross.android.aarch64.haskell.packages.integer-simple.ghcSplices-8_10).override {
-    overrides = nixpkgsCross.android.aarch64.haskell.overlays.combined;
-  });
-  ghcAndroidAarch32 = if __useNewerCompiler then ghcAndroidAarch32-8_10 else ghcAndroidAarch32-8_6;
-  ghcAndroidAarch32-8_6 = makeRecursivelyOverridableBHPToo ((makeRecursivelyOverridable nixpkgsCross.android.aarch32.haskell.packages.integer-simple.ghcSplices-8_6).override {
-    overrides = nixpkgsCross.android.aarch32.haskell.overlays.combined;
-  });
-  ghcAndroidAarch32-8_10 = makeRecursivelyOverridableBHPToo ((makeRecursivelyOverridable nixpkgsCross.android.aarch32.haskell.packages.integer-simple.ghcSplices-8_10).override {
-    overrides = nixpkgsCross.android.aarch32.haskell.overlays.combined;
-  });
   ghcIosSimulator64-8_6 = makeRecursivelyOverridableBHPToo ((makeRecursivelyOverridable nixpkgsCross.ios.simulator64.haskell.packages.integer-simple.ghcSplices-8_6).override {
     overrides = nixpkgsCross.ios.simulator64.haskell.overlays.combined;
   });
@@ -331,18 +318,10 @@ let iosSupport = system == "x86_64-darwin";
   #TODO: Separate debug and release APKs
   #TODO: Warn the user that the android app name can't include dashes
   android = androidWithHaskellPackages {
-    inherit ghcAndroidAarch64 ghcAndroidAarch32;
+    inherit ghcAndroidAarch64;
   };
-  android-8_6 = androidWithHaskellPackages {
-    ghcAndroidAarch64 = ghcAndroidAarch64-8_6;
-    ghcAndroidAarch32 = ghcAndroidAarch32-8_6;
-  };
-  android-8_10 = androidWithHaskellPackages {
-    ghcAndroidAarch64 = ghcAndroidAarch64-8_10;
-    ghcAndroidAarch32 = ghcAndroidAarch32-8_10;
-  };
-  androidWithHaskellPackages = { ghcAndroidAarch64, ghcAndroidAarch32 }: import ./android {
-    inherit nixpkgs nixpkgsCross ghcAndroidAarch64 ghcAndroidAarch32 overrideCabal;
+  androidWithHaskellPackages = { ghcAndroidAarch64 }: import ./android {
+    inherit nixpkgs nixpkgsCross ghcAndroidAarch64 overrideCabal;
     acceptAndroidSdkLicenses = config.android_sdk.accept_license or false;
   };
   iosAarch64 = iosWithHaskellPackages ghcIosAarch64;
@@ -381,11 +360,6 @@ in let this = rec {
           ghcIosAarch32-8_6
           ghcIosAarch32-8_10
           ghcAndroidAarch64
-          ghcAndroidAarch64-8_6
-          ghcAndroidAarch64-8_10
-          ghcAndroidAarch32
-          ghcAndroidAarch32-8_6
-          ghcAndroidAarch32-8_10
           ghcjs
           ghcjs8_6
           ghcjs8_10
@@ -404,7 +378,6 @@ in let this = rec {
   # Back compat
   ios = iosAarch64;
   ghcAndroidArm64 = lib.warn "ghcAndroidArm64 has been deprecated, using ghcAndroidAarch64 instead." ghcAndroidAarch64;
-  ghcAndroidArmv7a = lib.warn "ghcAndroidArmv7a has been deprecated, using ghcAndroidAarch32 instead." ghcAndroidAarch32;
   ghcIosArm64 = lib.warn "ghcIosArm64 has been deprecated, using ghcIosAarch64 instead." ghcIosAarch64;
 
   androidReflexTodomvc = android.buildApp {
@@ -412,18 +385,6 @@ in let this = rec {
     executableName = "reflex-todomvc";
     applicationId = "org.reflexfrp.todomvc";
     displayName = "Reflex TodoMVC";
-  };
-  androidReflexTodomvc-8_6 = android-8_6.buildApp {
-    package = p: p.reflex-todomvc;
-    executableName = "reflex-todomvc";
-    applicationId = "org.reflexfrp.todomvc.via_8_6";
-    displayName = "Reflex TodoMVC via GHC 8.6";
-  };
-  androidReflexTodomvc-8_10 = android-8_10.buildApp {
-    package = p: p.reflex-todomvc;
-    executableName = "reflex-todomvc";
-    applicationId = "org.reflexfrp.todomvc.via_8_10";
-    displayName = "Reflex TodoMVC via GHC 8.10";
   };
   iosReflexTodomvc = ios.buildApp {
     package = p: p.reflex-todomvc;
