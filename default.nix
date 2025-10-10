@@ -77,13 +77,15 @@ let iosSupport = system == "x86_64-darwin";
           });
         };
         packages = super.haskell.packages // {
-          ghcSplices-8_6 = super.haskell.packages.ghc865.override {
-            buildHaskellPackages = self.buildPackages.haskell.packages.ghcSplices-8_6;
-            ghc = self.buildPackages.haskell.compiler.ghcSplices-8_6;
-          };
-          ghcSplices-8_10 = super.haskell.packages.ghc8107.override {
-            buildHaskellPackages = self.buildPackages.haskell.packages.ghcSplices-8_10;
-            ghc = self.buildPackages.haskell.compiler.ghcSplices-8_10;
+          integer-simple = super.haskell.packages.integer-simple // {
+            ghcSplices-8_6 = super.haskell.packages.ghc865.override {
+              buildHaskellPackages = self.buildPackages.haskell.packages.integer-simple.ghcSplices-8_6;
+              ghc = self.buildPackages.haskell.compiler.ghcSplices-8_6;
+            };
+            ghcSplices-8_10 = super.haskell.packages.ghc8107.override {
+              buildHaskellPackages = self.buildPackages.haskell.packages.integer-simple.ghcSplices-8_10;
+              ghc = self.buildPackages.haskell.compiler.ghcSplices-8_10;
+            };
           };
         };
       };
