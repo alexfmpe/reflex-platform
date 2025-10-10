@@ -26,71 +26,6 @@ let iosSupport = system == "x86_64-darwin";
       "16.1" = "14.1";
     }.${iosSdkVersion} or (throw "Unknown iosSdkVersion: ${iosSdkVersion}");
 
-    # Overlay for GHC which supports the external splices plugin
-    splicesEval = self: super: {
-      haskell = super.haskell // {
-        compiler = super.haskell.compiler // {
-          ghcSplices-8_6 = (super.haskell.compiler.ghc865.overrideAttrs (drv: {
-            enableParallelBuilding = false;
-            src = nixpkgs.hackGet ./haskell-overlays/splices-load-save/dep/ghc-8.6;
-            # When building from the ghc git repo, ./boot must be run before configuring, whereas
-            # in the distribution tarball on the haskell.org downloads page, ./boot has already been
-            # run.
-            preConfigure = ''
-              echo ${drv.version} >VERSION
-              ./boot
-            '' + drv.preConfigure or "";
-            patches = [
-              # nixpkgs-21.05 ships with a version of autoreconf that is incompatible with ghc 8.6.5,
-              # Cf. https://gitlab.haskell.org/ghc/ghc/-/commit/ad2ef3a13f1eb000eab8e3d64592373b91a52806
-              ./haskell-overlays/splices-load-save/ghc-8.6-autoreconf.patch
-            ] ++ super.lib.optionals (super.stdenv.targetPlatform.isDarwin) [
-              ./haskell-overlays/patches/ghc865/fix-big-sur.patch
-            ];
-          })).override {
-            bootPkgs = super.haskell.packages.ghc865Binary // {
-              happy = super.haskell.packages.ghc865Binary.happy_1_19_12;
-            };
-            useLdGold = !(self.stdenv.targetPlatform.isAarch32) && self.stdenv.hostPlatform.useAndroidPrebuilt;
-            enableDocs = false;
-            enableHaddockProgram = false;
-          };
-          ghcSplices-8_10 = (super.haskell.compiler.ghc8107.override {
-            # New option for GHC 8.10. Explicitly enable profiling builds
-            enableProfiledLibs = true;
-            #enableShared = self.stdenv.hostPlatform == self.stdenv.targetPlatform;
-            #enableShared = false;
-            bootPkgs = if (super.stdenv.hostPlatform.isAarch64) then (super.haskell.packages.ghc8107Binary // {
-              happy = super.haskell.packages.ghc8107Binary.happy_1_19_12;
-            }) else
-            (super.haskell.packages.ghc865Binary // { happy = super.haskell.packages.ghc865Binary.happy_1_19_12; });
-          }).overrideAttrs (drv: {
-            src = nixpkgs.hackGet ./haskell-overlays/splices-load-save/dep/ghc-8.10;
-            # When building from the ghc git repo, ./boot must be run before configuring, whereas
-            # in the distribution tarball on the haskell.org downloads page, ./boot has already been
-            # run.
-            prePatch = ''
-              echo ${drv.version} >VERSION
-              patchShebangs boot
-              ./boot
-            '' + drv.preConfigure or "";
-          });
-        };
-        packages = super.haskell.packages // {
-          integer-simple = super.haskell.packages.integer-simple // {
-            ghcSplices-8_6 = super.haskell.packages.ghc865.override {
-              buildHaskellPackages = self.buildPackages.haskell.packages.integer-simple.ghcSplices-8_6;
-              ghc = self.buildPackages.haskell.compiler.ghcSplices-8_6;
-            };
-            ghcSplices-8_10 = super.haskell.packages.ghc8107.override {
-              buildHaskellPackages = self.buildPackages.haskell.packages.integer-simple.ghcSplices-8_10;
-              ghc = self.buildPackages.haskell.compiler.ghcSplices-8_10;
-            };
-          };
-        };
-      };
-    };
-
     hackGetOverlay = self: super:
       import ./nixpkgs-overlays/hack-get { inherit lib; } self;
 
@@ -132,7 +67,6 @@ let iosSupport = system == "x86_64-darwin";
         hackGetOverlay
         bindHaskellOverlays
         forceStaticLibs
-        splicesEval
         mobileGhcOverlay
         #allCabalHashesOverlay
         (self: super: {
