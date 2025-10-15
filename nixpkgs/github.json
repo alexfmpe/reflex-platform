@@ -1,8 +1,8 @@
 {
-  "owner": "obsidiansystems",
+  "owner": "alexfmpe",
   "repo": "nixpkgs",
-  "branch": "reflex-platform-unstable",
+  "branch": "reflex-platform-unstable-pagesize-16k",
   "private": false,
-  "rev": "22cf53eb29f52af963398de744c422d6fe15a3d4",
-  "sha256": "1hz0jhf40byn5v44sznx27msy5mx3a8i25pbqyh5dd42rripdd8z"
+  "rev": "a233758dc769b315dcd34ea7fddc5c8bd0181a6d",
+  "sha256": "sha256:14190nn6jz7j17cp9klaa08an3hm4lkpkvp2iidshwdxbqirh2h9"
 }
